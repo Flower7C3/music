@@ -12,7 +12,7 @@ garzul_volume = 0.2
 prophet_note_size_factor = 4
 prophet_volume = 0.2
 
-##| arp_volume = 0  
+##| arp_volume = 0
 ##| garzul_volume = 0
 ##| prophet_volume = 0
 
@@ -37,7 +37,7 @@ end
 
 # LOOPS ############
 live_loop :garzul do
-  sample :loop_garzul, amp: garzul_volume, rate: speed/120
+  sample :loop_garzul, amp: garzul_volume, beat_stretch: 16
   sleep_note 16
 end
 
