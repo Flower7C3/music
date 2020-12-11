@@ -4,40 +4,40 @@
 
 # CONFIG ############
 speed = 120.0
-tick_time = 60/speed
-rate_speed = speed/120
+use_bpm speed
 
 arp_volume = 0.2
 arp_note_size_factor = 0.6
 garzul_volume = 0.2
+prophet_note_size_factor = 4
 prophet_volume = 0.2
 
-##| arp_volume = 0
+##| arp_volume = 0  
 ##| garzul_volume = 0
 ##| prophet_volume = 0
 
 
 # PLAYERS ############
 define :play_arp do |tone_name, note_size = 0.5|
-  arp_release_time = tick_time*note_size*arp_note_size_factor
+  arp_release_time = note_size*arp_note_size_factor
   play (scale tone_name, :minor_pentatonic).tick, release: arp_release_time, amp: arp_volume
   sleep_note note_size
 end
 
 define :play_prophet do |tone_name, note_size|
-  sound_release_time = tick_time*2*note_size
+  sound_release_time = note_size*prophet_note_size_factor
   play tone_name, reease: sound_release_time, cutoff: rrand(70, 130), amp: prophet_volume
   sleep_note note_size
 end
 
 define :sleep_note do |note_size|
-  sleep tick_time*note_size
+  sleep note_size
 end
 
 
 # LOOPS ############
 live_loop :garzul do
-  sample :loop_garzul, amp: garzul_volume, rate: rate_speed
+  sample :loop_garzul, amp: garzul_volume, rate: speed/120
   sleep_note 16
 end
 
